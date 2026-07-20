@@ -1,0 +1,48 @@
+seed: 42
+
+paths:
+  drive_root: "./data/mimic"
+  patients: "patients.parquet"
+  admissions: "admissions.parquet"
+  diagnoses: "diagnoses_icd.parquet"
+  notes: "discharge_notes.parquet"
+  artifacts_dir: "./artifacts"
+  models_dir: "./models"
+  results_dir: "./results"
+
+cohort:
+  icd9_prefixes: ["3310", "290", "2941", "2942"]
+  icd10_prefixes: ["G30", "F00", "F01", "F02", "F03"]
+  control_ratio: 3
+  age_tolerance: 5
+  min_note_chars: 200
+  one_note_per_admission: true
+  max_notes: 6000
+
+preprocessing:
+  lowercase: true
+  remove_deid: true
+  collapse_whitespace: true
+
+split:
+  train: 0.70
+  val: 0.15
+  test: 0.15
+  group_by_subject: true
+
+embeddings:
+  model_name: "emilyalsentzer/Bio_ClinicalBERT"
+  batch_size: 16
+  max_length: 512
+  fp16: true
+  cache_file: "clinicalbert_cls_embeddings.npz"
+
+baseline:
+  max_features: 10000
+  ngram_min: 1
+  ngram_max: 2
+
+classifier:
+  C: 1.0
+  max_iter: 2000
+  class_weight: "balanced"
