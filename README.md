@@ -43,13 +43,12 @@ alzheimers-clinical-nlp/
 ├── config/
 │   └── config.yaml            # all paths + hyperparameters (edit here, not code)
 ├── data/
-│   └── README.md              # dataset documentation + access instructions
+│   └── prepare_data.py              # to prepare data by creating .parquet from dataset
 ├── docs/
 │   ├── methods.md             # method selection, literature, benchmarking
 │   └── pipeline.md            # stage-by-stage pipeline walkthrough
 ├── experiments/
 │   └── milestone3_pipeline.ipynb   # Colab notebook (mounts Drive, runs all)
-├── models/                    # trained classifiers (generated)
 ├── results/                   # metrics.json + confusion/ROC plots (generated)
 └── src/
     ├── config.py              # config loader + seeding
@@ -64,24 +63,56 @@ alzheimers-clinical-nlp/
     └── run_pipeline.py        # end-to-end orchestrator
 ```
 
-## Data access
+# Data
 
-MIMIC-IV is **credentialed** data (PhysioNet + CITI training). It is **not**
-included in this repo and must never be committed. This project reads the
-parquet exports stored in the author's Google Drive at
-`My Drive/ADRD_IDR/mimic/`. See [`data/README.md`](data/README.md) for the full
-list of tables and how to obtain access.
+This project uses **MIMIC-IV v3.1** (Medical Information Mart for Intensive Care),
+a de-identified EHR dataset from Beth Israel Deaconess Medical Center, maintained
+by the MIT Laboratory for Computational Physiology.
 
-## Quickstart (Google Colab, T4 GPU) — recommended
+## Access & licensing
 
-1. Open `experiments/milestone3_pipeline.ipynb` in Colab.
-2. `Runtime → Change runtime type → T4 GPU`.
+MIMIC-IV is **credentialed** data. To obtain it you must:
+
+1. Become a credentialed PhysioNet user.
+2. Complete the CITI "Data or Specimens Only Research" training.
+3. Sign the data use agreement at
+   <https://physionet.org/content/mimiciv/>.
+
+**No MIMIC data is stored in this repository**. The pipeline reads parquet exports which can be obtained by running prepare_data.py upon obtaining MIMIC-IV access and pointing the .parquet file(s) locations set via `paths.drive_root` in
+`config/config.yaml`.
+
+## Tables used
+
+Only four tables are needed. File names match the parquet files:
+
+| File | Rows (approx) | Columns used | Purpose |
+|---|---|---|---|
+| `patients.parquet` | ~300k | `subject_id, anchor_age, gender` | demographics, age matching |
+| `admissions.parquet` | ~430k | `subject_id, hadm_id, admittime` | pick one control admission |
+| `diagnoses_icd.parquet` | ~6M | `subject_id, hadm_id, icd_code, icd_version` | ICD-based labelling |
+| `discharge_notes.parquet` | ~330k | `subject_id, hadm_id, note_type, text` | discharge summary text |
+
+## ICD codes for the positive class
+
+- ICD-9: `331.0` (Alzheimer's), `290.x`, `294.1x`, `294.2x` (dementias) →
+  stored as `3310`, `290...`, `2941...`, `2942...`
+- ICD-10: `G30.x` (Alzheimer's), `F00`–`F03` (dementias) → stored as `G30...`,
+  `F00`–`F03`
+
+Codes are configurable in `config/config.yaml → cohort`.
+
+## Ethics
+
+All notes are de-identified (PHI replaced with placeholders). Use is restricted
+to the terms of the PhysioNet data use agreement. Do not attempt re-identification
+and do not redistribute the data.
+
+## Quickstart
+
+1. Open `experiments/milestone3_pipeline.ipynb` in a GPU environment.
 3. Run the cells top to bottom. The notebook mounts your Drive, installs
    `transformers`, and runs the whole pipeline via `src.run_pipeline.run()`.
 
-The pipeline is engineered so the **1.74 GB notes table is never fully loaded**
-and embedding extraction stays well within the T4's 16 GB — see
-[Why it fits on a T4](#why-it-fits-on-a-t4).
 
 ## Quickstart (local / CLI)
 
@@ -90,23 +121,8 @@ git clone <your-repo-url> alzheimers-clinical-nlp
 cd alzheimers-clinical-nlp
 pip install -r requirements.txt
 
-# edit config/config.yaml -> paths.drive_root to point at your MIMIC folder
 python -m src.run_pipeline --config config/config.yaml --no-mount
 ```
-
-Outputs land in `artifacts/` (cohort, dataset, cached embeddings),
-`models/` (trained `.joblib` files), and `results/` (`metrics.json`, plots).
-
-## Why it fits on a T4
-
-| Risk | Mitigation |
-|---|---|
-| `discharge_notes.parquet` is 1.74 GB | Cohort is built from the small tables first; notes are read with a **pyarrow `hadm_id` filter** so only the few-thousand cohort rows are materialised. |
-| BERT activations exhaust 16 GB VRAM | `torch.no_grad()`, `model.eval()`, **fp16** weights, **batch size 16**, embeddings moved to CPU each batch. |
-| GPU memory fragments over a long run | `torch.cuda.empty_cache()` + `gc.collect()` periodically; model freed after extraction. |
-| Kernel restart loses hours of work | Embeddings **cached to `.npz`**; re-running skips recomputation. |
-| Class imbalance | Stratified splits + `class_weight="balanced"` + F1/AUC-ROC reporting. |
-| Patient leakage across splits | Splits are **grouped by `subject_id`** (StratifiedGroupKFold) with an explicit leakage assertion. |
 
 ## Reproducibility
 
@@ -121,8 +137,7 @@ Outputs land in `artifacts/` (cohort, dataset, cached embeddings),
 |---|---|
 | 1. Research & selection of methods | `docs/methods.md` |
 | 2. Model implementation | `src/` (modular), `config/config.yaml`, `results/` |
-| 3. GitHub repository | this structure, meaningful commits, `.gitignore` |
-| 4. Documentation & reproducibility | this README, `docs/`, `data/README.md` |
+| 3. Documentation & reproducibility | this README, `docs/` |
 
 ## References
 
