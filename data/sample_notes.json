@@ -1,0 +1,58 @@
+[
+  {
+    "note_id": "SYN-0001",
+    "label": 1,
+    "predicted_label": 1,
+    "predicted_proba": 0.91,
+    "text": "Discharge Summary. Service: Neurology. HISTORY OF PRESENT ILLNESS: An 82 year old patient with a multi-year history of progressive memory decline, increasing confusion and difficulty managing medications at home. Family reports repetitive questioning and getting lost on familiar routes. ASSESSMENT: Findings consistent with Alzheimer's disease. MMSE 18/30. Started on donepezil. DISCHARGE DIAGNOSIS: Alzheimer's disease, dementia. Discharged to home with family support and outpatient neurology follow up."
+  },
+  {
+    "note_id": "SYN-0002",
+    "label": 1,
+    "predicted_label": 1,
+    "predicted_proba": 0.87,
+    "text": "Discharge Summary. Service: Medicine. The patient is a 79 year old admitted after a fall at home. Collateral history notes worsening short term memory over two years, word finding difficulty and disorientation to time and place. Neuro exam notable for impaired recall and executive dysfunction. Neurocognitive testing supports a major neurocognitive disorder due to Alzheimer's type dementia. Memantine initiated. Social work arranged home safety evaluation."
+  },
+  {
+    "note_id": "SYN-0003",
+    "label": 0,
+    "predicted_label": 0,
+    "predicted_proba": 0.08,
+    "text": "Discharge Summary. Service: Cardiology. A 61 year old patient admitted with chest pain and troponin elevation, managed for non ST elevation myocardial infarction. Cognition intact and oriented throughout admission, no memory complaints. Cardiac catheterization performed with drug eluting stent to the RCA. Discharged on dual antiplatelet therapy, statin and beta blocker with cardiology follow up."
+  },
+  {
+    "note_id": "SYN-0004",
+    "label": 1,
+    "predicted_label": 1,
+    "predicted_proba": 0.78,
+    "text": "Discharge Summary. Service: Geriatrics. An 85 year old with known dementia admitted for aspiration pneumonia. Baseline is severe cognitive impairment, nonverbal at times, requires assistance with all activities of daily living. Prior workup documented Alzheimer's disease. Pneumonia treated with antibiotics. Goals of care discussion held with family, comfort focused plan established. Discharged to skilled nursing facility."
+  },
+  {
+    "note_id": "SYN-0005",
+    "label": 0,
+    "predicted_label": 0,
+    "predicted_proba": 0.12,
+    "text": "Discharge Summary. Service: Orthopedics. A 55 year old healthy patient admitted for elective total knee arthroplasty. No cognitive concerns, alert and fully oriented. Postoperative course uncomplicated, ambulating with physical therapy. Pain controlled on oral analgesics. Discharged home with outpatient physical therapy and orthopedic follow up."
+  },
+  {
+    "note_id": "SYN-0006",
+    "label": 1,
+    "predicted_label": 1,
+    "predicted_proba": 0.83,
+    "text": "Discharge Summary. Service: Neurology. A 77 year old with gradually progressive cognitive decline over three years, now with impaired judgment, difficulty recognizing family members, and agitation in the evenings. Imaging shows generalized cortical atrophy with hippocampal predominance. Clinical picture consistent with Alzheimer's dementia. Caregiver education provided. Discharged home with home health services."
+  },
+  {
+    "note_id": "SYN-0007",
+    "label": 0,
+    "predicted_label": 1,
+    "predicted_proba": 0.54,
+    "text": "Discharge Summary. Service: Medicine. A 74 year old admitted with acute delirium in the setting of a urinary tract infection. Baseline cognition per family is normal and independent. Delirium resolved with treatment of infection and cognition returned to baseline by discharge. No prior history of dementia. This is a borderline case where transient confusion may mimic chronic cognitive decline."
+  },
+  {
+    "note_id": "SYN-0008",
+    "label": 1,
+    "predicted_label": 1,
+    "predicted_proba": 0.88,
+    "text": "Discharge Summary. Service: Psychiatry. An 80 year old with a two year decline in memory and function, admitted for behavioral disturbance and wandering. Neurocognitive evaluation and history support a diagnosis of Alzheimer's disease with behavioral symptoms. Low dose antipsychotic used briefly for safety. Discharge plan includes cognitive supportive care and caregiver respite resources."
+  }
+]

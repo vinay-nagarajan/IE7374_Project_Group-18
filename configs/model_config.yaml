@@ -1,0 +1,25 @@
+seed: 42
+
+generation:
+  model_name: "google/flan-t5-small"
+  model_type: "seq2seq"        
+  max_new_tokens: 96
+  min_new_tokens: 20            
+  num_beams: 4
+  no_repeat_ngram_size: 3      
+  repetition_penalty: 1.3       
+  temperature: 1.0
+  do_sample: false            
+  max_input_words: 180         
+
+evidence:
+  max_spans: 4                 
+
+data:
+  sample_notes: "data/sample_notes.json"
+  dataset_parquet: "artifacts/dataset.parquet"
+  n_samples: 8                
+paths:
+  outputs_dir: "outputs"
+  samples_txt: "outputs/samples.txt"
+  samples_jsonl: "outputs/samples.jsonl"

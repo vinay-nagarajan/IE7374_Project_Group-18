@@ -1,0 +1,52 @@
+========================================================================
+GENERATED EXPLANATIONS — Alzheimer's Detection (Milestone 4, RQ3)
+========================================================================
+
+[Sample 1] note_id=SYN-0001
+  True label      : Alzheimer's disease / dementia
+  Model prediction: Alzheimer's disease / dementia (p=0.91)
+  Evidence spans  : ['HISTORY OF PRESENT ILLNESS: An 82 year old patient with a multi-year history of progressive memory decline, increasing confusion and difficulty managing medications at home.', "DISCHARGE DIAGNOSIS: Alzheimer's disease, dementia.", 'Family reports repetitive questioning and getting lost on familiar routes.', "ASSESSMENT: Findings consistent with Alzheimer's disease."]
+  EXPLANATION     : HISTORY OF PRESENT ILLNESS: An 82 year old patient with a multi-year history of progressive memory decline, increasing confusion and difficulty managing medications at home.
+------------------------------------------------------------------------
+[Sample 2] note_id=SYN-0002
+  True label      : Alzheimer's disease / dementia
+  Model prediction: Alzheimer's disease / dementia (p=0.87)
+  Evidence spans  : ["Neurocognitive testing supports a major neurocognitive disorder due to Alzheimer's type dementia.", 'Collateral history notes worsening short term memory over two years, word finding difficulty and disorientation to time and place.', 'Memantine initiated.']
+  EXPLANATION     : Memantine is a neurotransmitter that causes short-term memory and disorientation.
+------------------------------------------------------------------------
+[Sample 3] note_id=SYN-0003
+  True label      : no dementia
+  Model prediction: no dementia (p=0.08)
+  Evidence spans  : ['Cognition intact and oriented throughout admission, no memory complaints.']
+  EXPLANATION     : This discharge note indicates no dementia. It is a sign that the memory is intact and oriented throughout admission.
+------------------------------------------------------------------------
+[Sample 4] note_id=SYN-0004
+  True label      : Alzheimer's disease / dementia
+  Model prediction: Alzheimer's disease / dementia (p=0.78)
+  Evidence spans  : ['An 85 year old with known dementia admitted for aspiration pneumonia.', 'Baseline is severe cognitive impairment, nonverbal at times, requires assistance with all activities of daily living.', "Prior workup documented Alzheimer's disease."]
+  EXPLANATION     : An 85 year old with known dementia admitted for aspiration pneumonia requires assistance with all activities of daily living.
+------------------------------------------------------------------------
+[Sample 5] note_id=SYN-0005
+  True label      : no dementia
+  Model prediction: no dementia (p=0.12)
+  Evidence spans  : ['No cognitive concerns, alert and fully oriented.']
+  EXPLANATION     : No cognitive concerns, alert and fully oriented are the main findings of a discharge note that indicates no dementia.
+------------------------------------------------------------------------
+[Sample 6] note_id=SYN-0006
+  True label      : Alzheimer's disease / dementia
+  Model prediction: Alzheimer's disease / dementia (p=0.83)
+  Evidence spans  : ["Clinical picture consistent with Alzheimer's dementia.", 'A 77 year old with gradually progressive cognitive decline over three years, now with impaired judgment, difficulty recognizing family members, and agitation in the evenings.', 'Imaging shows generalized cortical atrophy with hippocampal predominance.']
+  EXPLANATION     : A 77 year old with gradually progressive cognitive decline over three years, now with impaired judgment, difficulty recognizing family members, and agitation in the evenings.
+------------------------------------------------------------------------
+[Sample 7] note_id=SYN-0007
+  True label      : no dementia
+  Model prediction: Alzheimer's disease / dementia (p=0.54)
+  Evidence spans  : ['No prior history of dementia.', 'This is a borderline case where transient confusion may mimic chronic cognitive decline.', 'Delirium resolved with treatment of infection and cognition returned to baseline by discharge.']
+  EXPLANATION     : This is a borderline case where transient confusion may mimic chronic cognitive decline. Delirium resolved with treatment of infection and cognition returned to baseline by discharge.
+------------------------------------------------------------------------
+[Sample 8] note_id=SYN-0008
+  True label      : Alzheimer's disease / dementia
+  Model prediction: Alzheimer's disease / dementia (p=0.88)
+  Evidence spans  : ["Neurocognitive evaluation and history support a diagnosis of Alzheimer's disease with behavioral symptoms.", 'An 80 year old with a two year decline in memory and function, admitted for behavioral disturbance and wandering.']
+  EXPLANATION     : An 80 year old with a two year decline in memory and function, admitted for behavioral disturbance and wandering.
+------------------------------------------------------------------------
